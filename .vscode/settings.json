@@ -3,5 +3,5 @@
     "Lua.workspace.library": [
         "${3rd}/lovr/library"
     ],
-    "Lua.workspace.checkThirdParty": false
+    "Lua.workspace.checkThirdParty": true
 }
