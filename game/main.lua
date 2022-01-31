@@ -11,8 +11,6 @@ end
 
 function lovr.draw(dtime)
     local delta = lovr.timer.getDelta()
-
-
+    
     print(delta)
-
 end
