@@ -7,7 +7,6 @@ lovr
 math.randomseed(os.time())
 
 -- Holds all chunk data
-
 local __chunk_key       = {}
 local __chunk_dimension = {}
 local __chunk_blocks    = {}
@@ -46,7 +45,7 @@ local function __create_chunk(x, z, dimension)
         This is still 2D and needs to have more math backing a pure 1D implementation
     ]]--
     for i = 1, 32768 do
-        __chunk_blocks[index][i]    = 1
+        __chunk_blocks[index][i]    = 0
         __chunk_rotations[index][i] = 0
         __chunk_light[index][i]     = 0
     end
