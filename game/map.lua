@@ -14,9 +14,23 @@ local __chunk_rotations = {}
 local __chunk_light     = {}
 local __chunk_heightMap = {}
 
+
+local function __hash_chunk(x,z)
+	return (z + 2147483648) * 4294967296
+		 +  x + 2147483648
+end
+
+local function __get_chunk_pos(hash)
+	local x = (hash % 4294967296) - 2147483648
+	hash  = math.floor(hash / 4294967296)
+	local z = (hash % 4294967296) - 2147483648
+	return {x=x, z=z}
+end
+
+
 -- Simple keygenner
 local function keyGen(x,z)
-    return tostring(x) .. " " .. tostring(z)
+    return __hash_chunk(x,z)
 end
 
 -- Simple 3D to 1D converter
