@@ -80,7 +80,7 @@ function NewChunk(x, z, dimension)
 end
 
 -- Simple testing of getting lua chunk object data from tables
--- Returns as object or nil
+-- Returns as immutable to original object or nil
 function GetChunk(x, z)
 
     local key = keyGen(x,z)
