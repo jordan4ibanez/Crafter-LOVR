@@ -1,1 +1,1 @@
-.\lovr\windows\lovrc.bat --console game
+.\lovr\windows\lovrc.bat game
