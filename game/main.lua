@@ -7,12 +7,10 @@ lovr
 = 
 lovr
 
-function lovr.load(args)
-    local test1 = NewChunk(0,0)
-    local test2 = NewChunk(0,1)
 
-    print(test1.blocks[5])
-    print(test2.blocks[5])
+function lovr.load(args)
+    NewChunk(0,0,"overworld")
+    
 end
 
 
