@@ -1,4 +1,5 @@
 require("dump")
+require("chunkMeshBuilder")
 require("map")
 
 -- lua locals
@@ -8,11 +9,17 @@ lovr
 lovr
 
 
+local chunkMesh
+
+
 function lovr.load(args)
     NewChunk(0, 0, "overworld")
 
+    local chunkObject = GetChunk(0, 0)
 
-    
+
+    chunkMesh = BuildChunkMesh(chunkObject)
+
 end
 
 
