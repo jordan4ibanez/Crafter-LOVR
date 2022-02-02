@@ -1,7 +1,7 @@
 function lovr.conf(t)
     -- Set the project version and identity
     t.version = '0.15.0'
-    t.identity = "blah blah blah"
+    t.identity = "Crafter"
 
     -- Set save directory precedence
     t.saveprecedence = true
@@ -27,7 +27,7 @@ function lovr.conf(t)
 
     -- Headset settings
     -- 'openxr', 'oculus', 'vrapi', 'pico', 'openvr', 'webxr',
-    t.headset.drivers = {  'desktop' }
+    t.headset.drivers = {  "desktop" }
     t.headset.supersample = false
     t.headset.offset = 0
     t.headset.msaa = 0
@@ -35,12 +35,18 @@ function lovr.conf(t)
     -- Math settings
     t.math.globals = true
 
-    -- Configure the desktop window
-    t.window.width = 1080
-    t.window.height = 600
-    t.window.fullscreen = false
-    t.window.msaa = 0
-    t.window.vsync = 1
-    t.window.title = "The Potato game"
-    t.window.icon = nil
+    -- additional window parameters
+    t.window.fullscreentype = "desktop"	-- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)
+    t.window.x = nil			-- The x-coordinate of the window's position in the specified display (number)
+    t.window.y = nil			-- The y-coordinate of the window's position in the specified display (number)
+    t.window.minwidth = 1			-- Minimum window width if the window is resizable (number)
+    t.window.minheight = 1			-- Minimum window height if the window is resizable (number)
+    t.window.display = 1			-- Index of the monitor to show the window in (number)
+    t.window.centered = false		-- Align window on the center of the monitor (boolean)
+    t.window.topmost = false		-- Show window on top (boolean)
+    t.window.borderless = false		-- Remove all border visuals from the window (boolean)
+    t.window.resizable = false		-- Let the window be user-resizable (boolean)
+    t.window.opacity = 1			-- Window opacity value (number)
+
+    conf = t.window
 end
