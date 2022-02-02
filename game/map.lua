@@ -113,6 +113,11 @@ function GetChunk(x, z)
     return chunkContainer
 end
 
+-- Simple debug of chunk table
+function DumpChunkTableKeys()
+    print(dump(__chunk_key))
+end
+
 -- Simple testing of removing chunks from container
 function DeleteChunk(x, z)
 
