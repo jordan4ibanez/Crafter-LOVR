@@ -3,6 +3,7 @@ local window = require("lovr-libraries.lovr-window")
 local title
 
 function InitializeWindow()
+
     title = "Crafter " .. GetVersionName()
 
     -- sets window opacity, resolution and title
@@ -12,12 +13,22 @@ function InitializeWindow()
 
     window.setTitle(title)
 
-    local width, height, mode = window.getMode()
-
-    print(width .. " " .. height .. " " .. dump(mode))
-
 end
 
 function lovr.resize()
+
     lovr.graphics.reset()
+
+end
+
+function FullScreenWindow()
+
+    window.setFullscreen(true, "desktop", 1)
+
+end
+
+function UnFullScreenWindow()
+
+    window.setFullscreen(false, "desktop", 1)
+    
 end
