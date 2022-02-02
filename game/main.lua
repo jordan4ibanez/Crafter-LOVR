@@ -31,7 +31,7 @@ end
 function lovr.update(dtime)
     PollMouse()
 
-    print(dump(GetMousePos()))
+    -- print(dump(GetMousePos()))
 end
 
 
