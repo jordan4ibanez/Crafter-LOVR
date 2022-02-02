@@ -6,6 +6,8 @@ function InitializeWindow()
 
     title = "Crafter " .. GetVersionName()
 
+    window.setIcon("textures/icon.png")
+
     -- sets window opacity, resolution and title
     local width, height = window.getDisplayDimensions(1)
 
