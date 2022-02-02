@@ -28,6 +28,12 @@ function lovr.load(args)
 
 end
 
+function lovr.update(dtime)
+    PollMouse()
+
+    print(dump(GetMousePos()))
+end
+
 
 function lovr.draw()
 
