@@ -30,5 +30,11 @@ end
 function UnFullScreenWindow()
 
     window.setFullscreen(false, "desktop", 1)
-    
+
+end
+
+function UpdateWindowWithFPS()
+
+    window.setTitle(title .. lovr.timer.getFPS())
+
 end
