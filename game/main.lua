@@ -1,4 +1,5 @@
 require("window")
+require("mouse")
 require("info")
 require("dump")
 require("camera")
