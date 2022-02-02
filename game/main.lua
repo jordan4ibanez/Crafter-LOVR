@@ -14,9 +14,7 @@ local chunkMesh
 
 function lovr.load(args)
     NewChunk(0, 0, "overworld")
-    NewChunk(0, 1, "overworld")
-    NewChunk(0, 2, "overworld")
-
+    
     local chunkObject = GetChunk(0, 0)
 
     chunkMesh = BuildChunkMesh(chunkObject)
