@@ -35,5 +35,4 @@ function lovr.draw()
     lovr.graphics.translate(0, 0, -2)
     chunkMesh:draw(0,0,0)
     lovr.graphics.pop()
-
 end
