@@ -1,3 +1,5 @@
+require("window")
+require("info")
 require("dump")
 require("camera")
 require("chunkMeshBuilder")
@@ -13,8 +15,10 @@ local chunkMesh
 
 
 function lovr.load(args)
+    InitializeWindow()
+
     NewChunk(0, 0, "overworld")
-    
+
     local chunkObject = GetChunk(0, 0)
 
     chunkMesh = BuildChunkMesh(chunkObject)
