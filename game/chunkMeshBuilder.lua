@@ -1,22 +1,27 @@
-local xMax = 16;
-local yMax = 128;
-local ystride = xMax
-local zstride = xMax * yMax
+local __width = 16;
+local __depth = 128;
+local __xCalc = __depth * __width
+local __zCalc = __depth
 
+print("---------------------------------------RELOAD---------------------------------------------- + " .. os.time())
 
 local function __index_to_pos(index)
     index = index - 1
-    local z = math.floor( index / zstride)
-    index = index % zstride
-    local y = math.floor( index / ystride)
-    index = index % ystride
-    local x = math.floor(index)
+
+    local x = math.floor(index / __xCalc)
+    index = index % __xCalc
+
+    local z = math.floor(index / __zCalc)
+    index = index % __zCalc
+
+    local y = math.floor(index)
+
     -- Returns a Tuple
     return x, y, z;
 end
 
 local function __pos_to_index(x, y, z)
-	return math.floor((z * zstride) + (y * ystride) + x + 1)
+	return math.floor((z * __zCalc) + (x * __xCalc) + y + 1)
 end
 
 function BuildChunkMesh(chunk)
@@ -31,8 +36,12 @@ function BuildChunkMesh(chunk)
         local x,y,z = __index_to_pos(i)
         local index = __pos_to_index(x,y,z)
 
-        print("INTERNAL: " .. i .. " | CALCULATED: " .. index)
-        print("x: " .. x .. " y: " .. y .. " z: " .. z)
+        --print("INTERNAL: " .. i .. " | CALCULATED: " .. index)
+
+        if (i ~= index) then
+            print("FAILURE AT: " .. i .. " IS EQUAL TO " .. index .. "! MATH MISCALCULATION!")
+        end
+        --print("x: " .. x .. " y: " .. y .. " z: " .. z)
     end
     --print("end " .. collectgarbage("count"))
 
