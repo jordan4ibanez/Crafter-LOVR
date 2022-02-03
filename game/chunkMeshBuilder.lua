@@ -27,12 +27,12 @@ function BuildChunkMesh(chunk)
     local meshVertex = {}
 
     --print("start " .. collectgarbage("count"))
-    for i = 1, #chunk.blocks do
+    for i = 1,32768 do
         local x,y,z = __index_to_pos(i)
         local index = __pos_to_index(x,y,z)
 
-        --print("INTERNAL: " .. i .. " | CALCULATED: " .. index)
-        --print("x: " .. x .. " y: " .. y .. " z: " .. z)
+        print("INTERNAL: " .. i .. " | CALCULATED: " .. index)
+        print("x: " .. x .. " y: " .. y .. " z: " .. z)
     end
     --print("end " .. collectgarbage("count"))
 
