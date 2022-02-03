@@ -10,6 +10,18 @@ function BuildChunkMesh(chunk)
         3,
         'triangles'
     )
+    local test = ""
+
+    for i = 1,10000 do
+        test = test .. math.floor(math.random() * 10)
+    end
+
+    local blob = lovr.data.newBlob(test, "test")
+
+    test = nil
+
+    print(blob:getString())
+
     newChunkMesh:setVertices(
         {
             {0,0,0, 0,0,1},
