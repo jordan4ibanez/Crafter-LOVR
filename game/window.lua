@@ -15,6 +15,7 @@ function InitializeWindow()
 
     window.setTitle(title)
 
+    lovr.graphics.setCullingEnabled(true)
 end
 
 function lovr.resize()
