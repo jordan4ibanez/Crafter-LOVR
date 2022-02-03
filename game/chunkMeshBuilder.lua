@@ -15,6 +15,10 @@ local function __index_to_pos(index)
     return x, y, z;
 end
 
+local function __pos_to_index(x, y, z)
+	return math.floor((z * zstride) + (y * ystride) + x + 1)
+end
+
 function BuildChunkMesh(chunk)
     local newChunkMesh
     -- This mesh is a single triangle
@@ -25,6 +29,9 @@ function BuildChunkMesh(chunk)
     print("start " .. collectgarbage("count"))
     for i = 1, #chunk.blocks do
         local x,y,z = __index_to_pos(i)
+        local index = __pos_to_index(x,y,z)
+
+        print("INTERNAL: " .. i .. " | CALCULATED: " .. index)
         --print("x: " .. x .. " y: " .. y .. " z: " .. z)
     end
     print("end " .. collectgarbage("count"))
