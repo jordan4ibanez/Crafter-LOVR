@@ -3,8 +3,6 @@ local __depth = 128;
 local __xCalc = __depth * __width
 local __zCalc = __depth
 
-print("---------------------------------------RELOAD---------------------------------------------- + " .. os.time())
-
 local function __index_to_pos(index)
     index = index - 1
 
@@ -22,6 +20,10 @@ end
 
 local function __pos_to_index(x, y, z)
 	return math.floor((z * __zCalc) + (x * __xCalc) + y + 1)
+end
+
+local function __buildCube(x, y, z, width, height, texturePointX, texturePointY)
+    
 end
 
 function BuildChunkMesh(chunk)
