@@ -21,7 +21,7 @@ end
 function lovr.resize()
 
     lovr.graphics.reset()
-
+    lovr.graphics.setCullingEnabled(true)
 end
 
 function FullScreenWindow()
