@@ -24,6 +24,9 @@ function lovr.load(args)
 
     chunkMesh = BuildChunkMesh(chunkObject)
 
+    -- chunkMesh:release()
+    -- chunkMesh = nil
+
     DumpChunkTableKeys()
 end
 
