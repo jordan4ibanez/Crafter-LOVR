@@ -59,7 +59,7 @@ local function __create_chunk(x, z, dimension)
         This is still 2D and needs to have more math backing a pure 1D implementation
     ]]--
     for i = 1, 32768 do
-        __chunk_blocks[index][i]    = 1
+        __chunk_blocks[index][i]    = math.floor(math.random() + 0.5)
         __chunk_rotations[index][i] = 1
         __chunk_light[index][i]     = 1
     end
