@@ -197,19 +197,17 @@ function BuildChunkMesh(chunk)
 
     local prescan = 0
 
-    -- local blocksPointer = chunk.blocks
+    local blocksPointer = chunk.blocks
 
-    --[[
     for i = 1,32768 do
         if blocksPointer[i] > 0 then
             prescan = prescan + 1
         end
     end
-    ]]
 
     -- prescan blocks * bits * (vertex + textureMap + normals)
 
-    local myBlob = data.newBlob(32768 * 8 * (30 * 6), "blobby")
+    local myBlob = data.newBlob(prescan * 8 * (30 * 6), "blobby")
     local array = ffi.cast("float*", myBlob:getPointer())
 
 
@@ -217,7 +215,7 @@ function BuildChunkMesh(chunk)
     print("start " .. collectgarbage("count"))
     for i = 1,32768 do
         local x,y,z = __index_to_pos(i)
-        local index = __pos_to_index(x,y,z)
+        -- local index = __pos_to_index(x,y,z)
 
         --print("INTERNAL: " .. i .. " | CALCULATED: " .. index)
 
@@ -225,9 +223,11 @@ function BuildChunkMesh(chunk)
             -- print("FAILURE AT: " .. i .. " IS EQUAL TO " .. index .. "! MATH MISCALCULATION!")
         -- end
         -- print("x: " .. x .. " y: " .. y .. " z: " .. z)
-        array,arrayCounter = __buildCube(array, arrayCounter, x,y,z,nil,nil,nil,nil)
+        if (blocksPointer[i] > 0) then
+            array,arrayCounter = __buildCube(array, arrayCounter, x,y,z,nil,nil,nil,nil)
+        end
 
-        x,y,z,index = nil,nil,nil,nil
+        x,y,z = nil,nil,nil
     end
 
     -- This mesh is a single triangle
