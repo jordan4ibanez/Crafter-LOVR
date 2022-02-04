@@ -37,13 +37,14 @@ function lovr.update(dtime)
 end
 
 
-local rotate = 0
+local rotate = 0.2
 function lovr.draw()
 
     lovr.graphics.push() -- White triangle
     lovr.graphics.setColor(1,1,1)
-    lovr.graphics.translate(0, 0, -10)
-    lovr.graphics.rotate(rotate, 0, 1, 0)
+    lovr.graphics.translate(0, -0.5, -5)
+    lovr.graphics.rotate(0.5, 1,0,0)
+    lovr.graphics.rotate(rotate, 0,1,0)
     chunkMesh:draw(0,0,0)
     lovr.graphics.pop()
 
