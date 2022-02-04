@@ -1,3 +1,4 @@
+local ffi = require("ffi")
 require("window")
 require("mouse")
 require("info")
@@ -16,18 +17,22 @@ local chunkMesh
 
 
 function lovr.load(args)
-    InitializeWindow()
 
+    InitializeWindow()
     NewChunk(0, 0, "overworld")
 
     local chunkObject = GetChunk(0, 0)
 
     chunkMesh = BuildChunkMesh(chunkObject)
 
+
+    chunkMesh = BuildChunkMesh(chunkObject)
+
+
     -- chunkMesh:release()
     -- chunkMesh = nil
 
-    DumpChunkTableKeys()
+    --DumpChunkTableKeys()
 end
 
 function lovr.update(dtime)
@@ -37,16 +42,16 @@ function lovr.update(dtime)
 end
 
 
-local rotate = 0.2
+local rotate = 0
 function lovr.draw()
-
     lovr.graphics.push() -- White triangle
     lovr.graphics.setColor(1,1,1)
-    lovr.graphics.translate(0, -0.5, -5)
-    lovr.graphics.rotate(0.5, 1,0,0)
-    lovr.graphics.rotate(rotate, 0,1,0)
+    lovr.graphics.translate(0, -1, -30)
+     lovr.graphics.rotate(-0.5, 1,0,0)
+     lovr.graphics.rotate(rotate, 0,1,0)
+     lovr.graphics.rotate(rotate * 2, 1,0,0)
     chunkMesh:draw(0,0,0)
     lovr.graphics.pop()
 
-    rotate = rotate + lovr.timer.getDelta()
+    rotate = rotate + lovr.timer.getDelta() * 2
 end
