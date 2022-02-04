@@ -1,3 +1,9 @@
+-- lua locals
+local 
+floor
+= 
+math.floor
+
 local __width = 16;
 local __depth = 128;
 local __xCalc = __depth * __width
@@ -13,13 +19,13 @@ local material = lovr.graphics.newMaterial(texture, 1, 1, 1, 1)
 local function __index_to_pos(index)
     index = index - 1
 
-    local x = math.floor(index / __xCalc)
+    local x = floor(index / __xCalc)
     index = index % __xCalc
 
-    local z = math.floor(index / __zCalc)
+    local z = floor(index / __zCalc)
     index = index % __zCalc
 
-    local y = math.floor(index)
+    local y = floor(index)
 
     -- Returns a Tuple
     return x, y, z;
@@ -28,7 +34,7 @@ end
 -- Deconstructs 3D position to 1D table point
 local function __pos_to_index(x, y, z)
     -- Returns an integer
-	return math.floor((z * __zCalc) + (x * __xCalc) + y + 1)
+	return floor((z * __zCalc) + (x * __xCalc) + y + 1)
 end
 
 -- Automates the indices injection
@@ -179,7 +185,7 @@ function BuildChunkMesh(chunk)
     local start = lovr.timer.getTime()
     print("----------STARTING TEST------------")
     print("start " .. collectgarbage("count"))
-    for i = 1,1 do
+    for i = 1,32768 do
         local x,y,z = __index_to_pos(i)
         local index = __pos_to_index(x,y,z)
 
