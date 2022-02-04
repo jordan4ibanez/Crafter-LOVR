@@ -26,8 +26,6 @@ function lovr.load(args)
     chunkMesh = BuildChunkMesh(chunkObject)
 
 
-    chunkMesh = BuildChunkMesh(chunkObject)
-
 
     -- chunkMesh:release()
     -- chunkMesh = nil
@@ -38,12 +36,17 @@ end
 function lovr.update(dtime)
     PollMouse()
 
-    -- print(dump(GetMousePos()))
+    NewChunk(0,0, "overworld")
+    local chunkObject = GetChunk(0, 0)
+    chunkMesh = BuildChunkMesh(chunkObject)
 end
 
 
 local rotate = 0
 function lovr.draw()
+
+    lovr.graphics.print("FPS:" .. lovr.timer.getFPS(), 0, 6, -10)
+
     lovr.graphics.push() -- White triangle
     lovr.graphics.setColor(1,1,1)
     lovr.graphics.translate(0, -1, -30)
