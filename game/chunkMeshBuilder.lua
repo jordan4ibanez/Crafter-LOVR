@@ -71,7 +71,7 @@ local function __insert_data(x, y, z, w, q, array, arrayCount, xx, yy, zz)
     return array, arrayCount
 end
 
-local function __face_up(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+local function __face_up(array, arrayCount, x, y, z, texturePointX, texturePointY)
     -- NOTE: this was * x,  * y,  * z
 
     -- Tri 1
@@ -87,7 +87,7 @@ local function __face_up(array, arrayCount, x, y, z, width, height, texturePoint
     return array, arrayCount
 end
 
-local function __face_down(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+local function __face_down(array, arrayCount, x, y, z, texturePointX, texturePointY)
     -- NOTE: this was * x,  * y,  * z
 
     -- Tri 1
@@ -105,7 +105,7 @@ local function __face_down(array, arrayCount, x, y, z, width, height, texturePoi
 end
 
 
-local function __face_south(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+local function __face_south(array, arrayCount, x, y, z, texturePointX, texturePointY)
     -- NOTE: this was * x,  * y,  * z
 
     -- Tri 1
@@ -122,7 +122,7 @@ local function __face_south(array, arrayCount, x, y, z, width, height, texturePo
 end
 
 
-local function __face_north(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+local function __face_north(array, arrayCount, x, y, z, texturePointX, texturePointY)
     -- NOTE: this was * x,  * y,  * z
     -- Tri 1
     array, arrayCount = __insert_data(0,0,0, 0,0, array, arrayCount, x, y, z)
@@ -138,7 +138,7 @@ local function __face_north(array, arrayCount, x, y, z, width, height, texturePo
 end
 
 
-local function __face_west(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+local function __face_west(array, arrayCount, x, y, z, texturePointX, texturePointY)
     -- NOTE: this was * x,  * y,  * z
 
     -- Tri 1
@@ -154,7 +154,7 @@ local function __face_west(array, arrayCount, x, y, z, width, height, texturePoi
     return array, arrayCount
 end
 
-local function __face_east(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+local function __face_east(array, arrayCount, x, y, z, texturePointX, texturePointY)
     -- NOTE: this was * x,  * y,  * z
     array, arrayCount = __insert_data(0,0,0, 0,1, array, arrayCount, x, y, z)
     array, arrayCount = __insert_data(0,0,1, 0,0, array, arrayCount, x, y, z)
@@ -170,19 +170,19 @@ end
 
 
 -- Builds a single block of the chunk's mesh - utilizes localized functions for this
-local function __buildCube(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+local function __buildCube(array, arrayCount, x, y, z, texturePointX, texturePointY)
 
-    array, arrayCount =    __face_up(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+    array, arrayCount =    __face_up(array, arrayCount, x, y, z, texturePointX, texturePointY)
 
-    array, arrayCount =  __face_down(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+    array, arrayCount =  __face_down(array, arrayCount, x, y, z, texturePointX, texturePointY)
 
-    array, arrayCount = __face_north(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+    array, arrayCount = __face_north(array, arrayCount, x, y, z, texturePointX, texturePointY)
 
-    array, arrayCount = __face_south(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+    array, arrayCount = __face_south(array, arrayCount, x, y, z, texturePointX, texturePointY)
 
-    array, arrayCount = __face_west(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+    array, arrayCount = __face_west(array, arrayCount, x, y, z, texturePointX, texturePointY)
 
-    array, arrayCount = __face_east(array, arrayCount, x, y, z, width, height, texturePointX, texturePointY)
+    array, arrayCount = __face_east(array, arrayCount, x, y, z, texturePointX, texturePointY)
 
     return array, arrayCount
 end
@@ -205,14 +205,13 @@ function BuildChunkMesh(chunk)
         end
     end
 
-    -- prescan blocks * bits * (vertex + textureMap + normals)
-
+    -- blocks * bits * (allocations * number of allocations)
     local myBlob = data.newBlob(prescan * 8 * (30 * 6), "blobby")
     local array = ffi.cast("float*", myBlob:getPointer())
 
 
     print("----------STARTING TEST------------")
-    print("start " .. collectgarbage("count"))
+    -- print("start " .. collectgarbage("count"))
     for i = 1,32768 do
         local x,y,z = __index_to_pos(i)
         -- local index = __pos_to_index(x,y,z)
@@ -236,17 +235,12 @@ function BuildChunkMesh(chunk)
             {"lovrPosition", "float", 3}, {"lovrTexCoord", "float", 2}
         },
         myBlob, "triangles", "static", false)
-
-    --release memory
-    -- array = nil
-    -- myBlob:release()
-
-    --array = nil
-    --myBlob = nil
+    array = nil
+    myBlob = nil
 
     newChunkMesh:setMaterial(material)
     
-    print("end " .. collectgarbage("count"))
+    -- print("end " .. collectgarbage("count"))
     print("Elapsed time: " .. timer.getTime() - start)
     print("------------TEST HAS ENDED----------------")
     return newChunkMesh
