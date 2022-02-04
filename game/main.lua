@@ -49,7 +49,7 @@ function lovr.draw()
 
     lovr.graphics.push() -- White triangle
     lovr.graphics.setColor(1,1,1)
-    lovr.graphics.translate(0, -1, -30)
+    lovr.graphics.translate(0, -1, -70)
      lovr.graphics.rotate(-0.5, 1,0,0)
      lovr.graphics.rotate(rotate, 0,1,0)
      lovr.graphics.rotate(rotate * 2, 1,0,0)
