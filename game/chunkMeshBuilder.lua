@@ -25,14 +25,19 @@ local function __pos_to_index(x, y, z)
 	return math.floor((z * __zCalc) + (x * __xCalc) + y + 1)
 end
 
+function __build_indices()
+
+end
+
 -- Builds a single block of the chunk's mesh
-local function __buildCube(x, y, z, width, height, texturePointX, texturePointY, meshVertex, vertexCount, indices)
+local function __buildCube(x, y, z, width, height, texturePointX, texturePointY, vertices, vertexCount, indices, indicesCount)
     -- meshVertex is table driven, it's pointer is being utilized here, no need for return
     -- NOTE: this was * x,  * y,  * z
-    meshVertex[vertexCount + 1] = {0,1,0, 0,0,1}
-    meshVertex[vertexCount + 2] = {0,0,0, 0,0,1}
-    meshVertex[vertexCount + 3] = {1,0,0, 0,0,1}
-    meshVertex[vertexCount + 4] = {1,1,0, 0,0,1}
+    vertices[vertexCount + 1] = {0,1,0, 0,0,1}
+    vertices[vertexCount + 2] = {0,0,0, 0,0,1}
+    vertices[vertexCount + 3] = {1,0,0, 0,0,1}
+    vertices[vertexCount + 4] = {1,1,0, 0,0,1}
+
 
     indices = {
         -- Tri 1
@@ -50,7 +55,7 @@ end
 
 function BuildChunkMesh(chunk)
     local newChunkMesh
-    local meshVertex = {}
+    local vertices = {}
     local indices = {}
 
 
@@ -68,7 +73,7 @@ function BuildChunkMesh(chunk)
             -- print("FAILURE AT: " .. i .. " IS EQUAL TO " .. index .. "! MATH MISCALCULATION!")
         -- end
         -- print("x: " .. x .. " y: " .. y .. " z: " .. z)
-        vertexCount, indices = __buildCube(x,y,z,nil,nil,nil,nil,meshVertex, vertexCount, indices)
+        vertexCount, indices = __buildCube(x,y,z,nil,nil,nil,nil,vertices, vertexCount, indices)
 
         x,y,z,index = nil,nil,nil,nil
     end
@@ -79,7 +84,7 @@ function BuildChunkMesh(chunk)
     -- This mesh is a single triangle
     newChunkMesh = lovr.graphics.newMesh({{ 'lovrPosition', 'float', 3 }, { 'lovrNormal', 'float', 3 }}, vertexCount, "triangles", "static", false)
 
-    newChunkMesh:setVertices(meshVertex)
+    newChunkMesh:setVertices(vertices)
 
     newChunkMesh:setVertexMap(indices)
     
