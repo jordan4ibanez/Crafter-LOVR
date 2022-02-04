@@ -47,5 +47,5 @@ function lovr.draw()
     chunkMesh:draw(0,0,0)
     lovr.graphics.pop()
 
-    -- rotate = rotate + lovr.timer.getDelta()
+    rotate = rotate + lovr.timer.getDelta()
 end
