@@ -15,13 +15,13 @@ function InitializeWindow()
 
     window.setTitle(title)
 
-    -- lovr.graphics.setCullingEnabled(true)
+    lovr.graphics.setCullingEnabled(true)
 end
 
 function lovr.resize()
 
     lovr.graphics.reset()
-    -- lovr.graphics.setCullingEnabled(true)
+    lovr.graphics.setCullingEnabled(true)
 end
 
 function FullScreenWindow()
